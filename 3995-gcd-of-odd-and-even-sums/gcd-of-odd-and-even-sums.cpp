@@ -28,3 +28,14 @@ public:
         return ans;
     }
 };
+
+
+// int odd_sum = 0;
+// int even_sum = 0;
+
+// for(int i=1;i<=n;i++){  //by for loop logic
+//     odd_sum += (2*i - 1);
+//     even_sum += (2*i);
+// }
+
+// return gcd(odd_sum, even_sum);
