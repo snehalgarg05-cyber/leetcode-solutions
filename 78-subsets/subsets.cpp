@@ -1,22 +1,23 @@
 class Solution {
 public:
 
-    void subseq(vector<int> &nums,int index,int n,vector<vector<int>> & ans,vector<int>& temp){
+    void subset(vector<int>& nums, int index, int n, vector<vector<int>>& result,vector<int>& temp){
         if(index==n){
-            ans.push_back(temp);
+            result.push_back(temp);
             return;
         }
-        subseq(nums,index+1,n,ans,temp); //no
+        subset(nums,index+1,n,result,temp);
         temp.push_back(nums[index]);
-        subseq(nums,index+1,n,ans,temp); //yes;
+        subset(nums,index+1,n,result,temp);
         temp.pop_back();
     }
 
+
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> temp;
         int n = nums.size();
-        subseq(nums,0,n,ans,temp);
-        return ans;
+        vector<vector<int>> result;
+        vector<int> temp;
+        subset(nums,0,n,result,temp);
+        return result;
     }
 };
