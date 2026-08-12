@@ -1,32 +1,31 @@
 class Solution {
-    bool dfs(int node, int dest, vector<vector<int>>& adj, vector<bool>& visited) {
-        // Base case: reached destination!
+    // Add this DFS function
+    bool dfs(int node, int dest, vector<vector<int>>& Adjlist, vector<bool>& visited){
         if(node == dest) return true;
-        
-        visited[node] = true; // mark current node visited
-        
-        // Try all neighbors
-        for(int neighbor : adj[node]){
-            if(!visited[neighbor]){
-                // If any path leads to dest, return true
-                if(dfs(neighbor, dest, adj, visited)) return true;
+        visited[node] = true;
+        for(int i = 0; i < Adjlist[node].size(); i++){
+            if(!visited[Adjlist[node][i]]){
+                if(dfs(Adjlist[node][i], dest, Adjlist, visited)) return true;
             }
         }
-        return false; // no path found from this node
+        return false;
     }
 
 public:
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
-        if(source == destination) return true;
-        
-        // Build adjacency list
-        vector<vector<int>> adj(n);
-        for(auto& e : edges){
-            adj[e[0]].push_back(e[1]);
-            adj[e[1]].push_back(e[0]);
+        vector<vector<int>> Adjlist(n);  
+        if(n == 1){
+            return true;
         }
-        
+        for(int i = 0; i < edges.size(); i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            Adjlist[u].push_back(v);
+            Adjlist[v].push_back(u);
+        }
+
+        // Remove your old 2 for loops and replace with this
         vector<bool> visited(n, false);
-        return dfs(source, destination, adj, visited);
+        return dfs(source, destination, Adjlist, visited);
     }
 };
