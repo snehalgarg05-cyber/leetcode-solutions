@@ -24,10 +24,11 @@ public:
         int islands=0;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
+                count=0;
                 if(grid[i][j]==1){
                     dfs(grid,i,j,count);
                     max_count=max(count,max_count);
-                    count=0;
+                    
                     
                 }
             }
