@@ -3,35 +3,35 @@ public:
 
     int n;
 
-    void subset(vector<int>& nums, int i, vector<int>& temp,
-                set<vector<int>>& result) {
-
-        if(i == n) {
-            result.insert(temp);
+    void subset(vector<int>& nums, int i, vector<int>& temp,vector<vector<int>>& result){
+        if(i==n){
+            result.push_back(temp);
             return;
         }
-
-        // Don't take
-        subset(nums, i + 1, temp, result);
-
-        // Take
+        subset(nums,i+1,temp,result);
         temp.push_back(nums[i]);
-        subset(nums, i + 1, temp, result);
+        subset(nums,i+1,temp,result);
         temp.pop_back();
     }
-
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-
-        n = nums.size();
-
-        sort(nums.begin(), nums.end());   // ⭐ THIS WAS MISSING
-
-        set<vector<int>> result;
+    vector<vector<int>> result;
         vector<int> temp;
+        sort(nums.begin(),nums.end());
+        n = nums.size();
+        subset(nums,0,temp,result);
 
-        subset(nums, 0, temp, result);
+        sort(result.begin(),result.end());
 
-        vector<vector<int>> ans(result.begin(), result.end());
+        
+        vector<vector<int>> ans;
+
+        ans.push_back(result[0]);
+
+        for(int j=1;j<result.size();j++){
+            if(result[j]!=result[j-1]){
+                ans.push_back(result[j]);
+            }
+        }
 
         return ans;
     }
