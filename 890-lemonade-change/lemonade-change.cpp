@@ -17,7 +17,7 @@ public:
                 }
             }
             else{
-                if(count_five>=1 && count_ten>=1){
+                if(count_five>=1 && count_ten!=0){
                     count_five--,count_ten--;
                 }
                 else if(count_five>=3 && count_ten<=0){
