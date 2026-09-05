@@ -23,7 +23,7 @@ public:
             dfs(grid, i, j + 1);
             dfs(grid, i, j - 1);
 
-            return -1000000;   // component touches boundary
+            return -1;   // component touches boundary
         }
 
         grid[i][j] = -1;
@@ -35,7 +35,7 @@ public:
 
         // If any part of component touches boundary
         if (down < 0 || up < 0 || right < 0 || left < 0)
-            return -1000000;
+            return -1;
 
         return 1 + down + up + right + left;
     }
