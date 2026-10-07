@@ -22,6 +22,6 @@ public:
             }
             B=B->next;
         }
-        return NULL;
+        return B;
     }
 };
