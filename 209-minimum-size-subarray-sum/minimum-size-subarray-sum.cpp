@@ -2,8 +2,9 @@ class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
         int n = nums.size();
+        int start=0,end=0;
+        int sum=0;
         int min_len=INT_MAX;
-        int start=0,end=0,sum=0;
         while(end<n){
             sum+=nums[end];
             while(sum>=target){
