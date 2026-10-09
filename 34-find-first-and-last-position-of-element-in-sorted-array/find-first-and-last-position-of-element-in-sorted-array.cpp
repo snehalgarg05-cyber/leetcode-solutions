@@ -1,18 +1,39 @@
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-
-        // First position where target can occur
-        int first = lower_bound(nums.begin(), nums.end(), target) - nums.begin();
-
-        // First position greater than target
-        int last = upper_bound(nums.begin(), nums.end(), target) - nums.begin() - 1;
-
-        // Target does not exist
-        if(first == nums.size() || nums[first] != target) {
-            return {-1, -1};
+        vector<int> result(2,-1);
+        int n = nums.size();
+        int start=0,end=n-1;
+        int ans1=-1,ans2=-1;
+        while(start<=end){ //first
+            int mid = start+(end-start)/2;
+            if(nums[mid]==target){
+                ans1=mid;
+                end=mid-1;
+            }
+            else if(nums[mid]<target){
+                start=mid+1;
+            }
+            else{
+                end=mid-1;
+            }
         }
-
-        return {first, last};
+        start=0,end=n-1;
+        while(start<=end){
+            int mid = start+(end-start)/2;
+            if(nums[mid]==target){
+                ans2=mid;
+                start=mid+1;
+            }
+            else if(nums[mid]<target){
+                start=mid+1;
+            }
+            else{
+                end=mid-1;
+            }
+        }
+        result[0]=ans1;
+        result[1]=ans2;
+        return result;
     }
 };
