@@ -11,10 +11,11 @@ public:
         if(t[n]!=-1){
             return t[n];
         }
-        int one_step = solve(n-1);
-        int two_steps = solve(n-2);
-        return t[n] = one_step+two_steps;
+        int first = solve(n-1);
+        int second = solve(n-2);
+        return t[n]=first+second;
     }
+
     int climbStairs(int n) {
         memset(t,-1,sizeof(t));
         return solve(n);
