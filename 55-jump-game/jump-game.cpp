@@ -9,13 +9,11 @@ public:
             }
             if(max_idx>=n-1){
                 return true;
-            } 
+            }
             if(i>=max_idx){
                 return false;
             }
-              
         }
-        
         return false;
     }
 };
