@@ -1,7 +1,7 @@
 class Solution {
 public:
     int t[101];
-    int solve(vector<int>& nums,int i, int n){
+    int solve(vector<int>& nums,int i,int n){
         if(i>=n){
             return 0;
         }
@@ -13,8 +13,8 @@ public:
         return t[i] = max(steal,skip);
     }
     int rob(vector<int>& nums) {
-        int n = nums.size();
         memset(t,-1,sizeof(t));
+        int n = nums.size();
         return solve(nums,0,n);
     }
 };
