@@ -1,48 +1,47 @@
 class Solution {
 public:
+    int m, n;
 
-    void dfs(int i,int j,vector<vector<int>>&grid,long long &sum){
+    long long dfs(vector<vector<int>>& grid, int i, int j) {
 
-        int row = grid.size();
-        int col = grid[0].size();
-
-        if(i<0 || i>=row || j<0 || j>=col || grid[i][j]==-1) return;
-
-        sum+=grid[i][j];
-
-        grid[i][j] = -1;
-
-        int dr[] = {-1,1,0,0};
-        int dc[]= {0,0,-1,1};
-
-        for(int k=0;k<4;++k){
-
-            int newR = i + dr[k];
-            int newC = j + dc[k];
-
-            if(newR>=0 && newR <row && newC>=0 && newC<col && grid[newR][newC]>0){
-                dfs(newR,newC,grid,sum);
-            }
+        if(i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 0) {
+            return 0;
         }
 
+        long long sum = grid[i][j];
+
+        // Mark current cell as visited
+        grid[i][j] = 0;
+
+        sum += dfs(grid, i+1, j);
+        sum += dfs(grid, i-1, j);
+        sum += dfs(grid, i, j+1);
+        sum += dfs(grid, i, j-1);
+
+        return sum;
     }
+
     int countIslands(vector<vector<int>>& grid, int k) {
-        
-        int row = grid.size();
-        int col = grid[0].size();
 
-        int cnt =0;
+        m = grid.size();
+        n = grid[0].size();
 
-        for(int i=0;i<row;++i){
-            for(int j=0;j<col;++j){
-                if(grid[i][j]>0) {
-                    long long sum =0;
-                    dfs(i,j,grid,sum);
-                    if(sum%k==0)cnt++;
+        int count = 0;
+
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+
+                if(grid[i][j] != 0) {
+
+                    long long sum = dfs(grid, i, j);
+
+                    if(sum % k == 0) {
+                        count++;
+                    }
                 }
             }
         }
 
-        return cnt;
+        return count;
     }
 };
